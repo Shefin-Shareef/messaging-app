@@ -1,4 +1,4 @@
-package com.shefin.oauth.controller;
+package com.shefin.messagingApp.controller;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,4 +1,4 @@
-package com.shefin.oauth.config;
+package com.shefin.messagingApp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
