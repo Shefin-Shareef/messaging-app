@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shefin</groupId>
-	<artifactId>SpringOAuth</artifactId>
+	<artifactId>messaging-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringOAuth</name>
+	<name>messaging-app</name>
 	<description>Demo project for Spring Boot Security</description>
 	<properties>
 		<java.version>17</java.version>
@@ -21,6 +21,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
