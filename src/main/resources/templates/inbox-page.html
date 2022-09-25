@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Inbox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+          .container {
+      display: grid;
+
+      grid-template-areas:
+        "header header header"
+        "nav content content"
+        "footer footer footer";
+
+      grid-template-columns: 200px 1fr 200px;
+      grid-template-rows: auto 1fr auto;
+      grid-gap: 10px;
+
+      height: 100vh;
+    }
+    header {
+      grid-area: header;
+    }
+
+    nav {
+      grid-area: nav;
+      margin-left: 0.5rem;
+    }
+
+    main {
+      grid-area: content;
+    }
+
+    aside {
+      grid-area: side;
+      margin-right: 0.5rem;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+
+
+
+    </style>
+
+
+</head>
+<body>
+	
+  <div class="container">
+    <header>
+      <h2>Hello, Shefin</h2>
+    </header>
+  
+    <nav>
+      <!-- Navigation -->
+      <div class="card">
+        <div class="card-header">
+          Defualt Folders
+        </div>
+      <ul class="list-group">
+        <li th:each = "folder : ${defaultFolders}" 
+            class="list-group-item d-flex justify-content-between align-items-center">
+          <span th:text="${folder.label}">Label</Label></span>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+      </ul>
+      </div>
+
+      <div class="card" th:if="${userFolders}">
+        <div class="card-header">
+          User Folders
+        </div>
+      <ul class="list-group">
+        <li th:each = "folder : ${userFolders}" 
+            class="list-group-item d-flex justify-content-between align-items-center">
+            <span th:text="${folder.label}">Label</Label></span>
+          <span class="badge bg-primary rounded-pill">14</span>
+        </li>
+      </ul>
+      </div>
+
+    </nav>
+  
+    <main>
+      <!-- Main content -->
+      <div class="card" th:if="${inboxList}">
+        <div class="card-header" th:text="${folderLabel}">
+          Inbox
+        </div>
+      <div class="list-group">
+        <a th:each = "message : ${inboxList}" 
+          th:href="@{'/messages/' + ${message.key.timeUUID}}" 
+          class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" th:text="${message.subject}">List group item heading</h5>
+            <small>3 days ago</small>
+          </div>
+          <p class="mb-1" th:text="${message.to}">Some placeholder content in a paragraph.</p>
+        </a>
+      </div>
+      </div>
+    </main>
+  
+    <aside>
+      <!-- Sidebar / Ads -->
+    </aside>
+  
+    <footer>
+      <!-- Footer content -->
+    </footer>
+  </div>
+
+	
+	
+</body>
+</html>

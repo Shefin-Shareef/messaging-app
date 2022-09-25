@@ -6,10 +6,10 @@ spring:
       password: liFOAExJT4n43.t7Xvhplc2bEJHL9Ajt7BLTkarfqFXDkhjxIkN4eomGWeDs1cFdKxpAlsgOfbG0BlMYU-F2qgLTB,QG+B3mWZpmS,yAEhX370zteIYws2r,WqFva7S.
       schema-action: recreate-drop-unused
       request:
-        timeout: 10s
+        timeout: 20s
       connection:
-        connect-timeout: 10s
-        init-query-timeout: 10s
+        connect-timeout: 20s
+        init-query-timeout: 20s
   application:
     name: messaging-app
   security:
