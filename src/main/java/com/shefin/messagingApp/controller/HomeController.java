@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/")
-	public String home(@AuthenticationPrincipal OAuth2User principal) {
-//		if (principal==null || !StringUtils.hasText(principal.getAttribute("login"))) {
-//			return "index.html";
-//		}
-		return "index.html";
+//	@RequestMapping("/")
+//	public String home(@AuthenticationPrincipal OAuth2User principal) {
+////		if (principal==null || !StringUtils.hasText(principal.getAttribute("login"))) {
+////			return "index.html";
+////		}
+//		return "index.html";
 		
-	}
+//	}
 
 }

@@ -1,6 +1,5 @@
 package com.shefin.messagingApp.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,8 +38,9 @@ public class InboxController {
 	@Autowired
 	private MessageRepo messageRepo;
 	
-	@RequestMapping("/inbox")
+	@RequestMapping("/")
 	public String homePage(
+			@RequestParam(required = false) String folder,
 			@AuthenticationPrincipal OAuth2User principal, 
 			Model model
 			) {
@@ -63,12 +62,14 @@ public class InboxController {
 		
 		//fetching message list ; this should be a path variable as we want the page to load when click on it
 		
+		if (!StringUtils.hasText(folder)) {
+			folder="Inbox";
+		}
 		
 		
-		
-		List<MessageList> inboxList = messageListRepo.findAllByKey_IdAndKey_Label(userId, "Inbox");
+		List<MessageList> inboxList = messageListRepo.findAllByKey_IdAndKey_Label(userId, folder);
 		model.addAttribute("inboxList", inboxList);
-		model.addAttribute("folderLabel", "inbox");
+		model.addAttribute("folderName", folder);
 		
 		return "inbox-page.html";
 		
