@@ -49,7 +49,7 @@ public class InboxController {
 			return "index.html";
 		}
 		
-		// here we need to pass all info from DB to the html page
+		// here, need to pass all info from DB to the html page
 		
 		String userId = principal.getAttribute("login");
 		

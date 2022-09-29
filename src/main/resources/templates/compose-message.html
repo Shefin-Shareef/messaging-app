@@ -68,7 +68,6 @@
   
     <nav>
       <!-- Navigation -->
-      <a href="/compose" class="btn btn-primary">Compose Message</a>
       <div class="card">
         <div class="card-header">
           Defualt Folders
@@ -89,7 +88,7 @@
       <ul class="list-group">
         <li th:each = "folder : ${userFolders}" 
             class="list-group-item d-flex justify-content-between align-items-center">
-            <a th:href="@{'/?folder='+${folder.label}}" th:text="${folder.label}">Label</Label></a>
+            <a th:href="@{'/?folder='+ ${folder.label}}" th:text="${folder.label}">Label</Label></a>
           <span class="badge bg-primary rounded-pill">14</span>
         </li>
       </ul>
@@ -99,21 +98,30 @@
   
     <main>
       <!-- Main content -->
-      <div class="card" th:if="${inboxList}">
-        <div class="card-header" th:text="${folderName}">
-          Inbox
+      <div class="card">
+        <div class="card-header">Create New Message</div>
+        <div class="card-body">
+			<form>
+			  <div class="mb-3">
+			    <label for="toIds" class="form-label">To</label>
+			    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+			    <div id="toIdHelp" class="form-text">Enter comma separated Github IDs of recipients</div>
+			  </div>
+			  <div class="mb-3">
+			    <label for="subject" class="form-label">Subject</label>
+			    <input type="text" class="form-control" id="subject">
+			  </div>
+			  <div class="mb-3">
+			    <label for="body" class="form-label">Body</label>
+			    <textarea rows="9" type="text" class="form-control" id="body"></textarea>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Send</button>
+			</form>
         </div>
-      <div class="list-group">
-        <a th:each = "message : ${inboxList}" 
-          th:href="@{'/messages/' + ${message.key.timeUUID}}" 
-          class="list-group-item list-group-item-action">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1" th:text="${message.subject}">List group item heading</h5>
-            <small>3 days ago</small>
-          </div>
-          <p class="mb-1" th:text="${message.to}">Some placeholder content in a paragraph.</p>
-        </a>
-      </div>
+            
+          
+
+      
       </div>
     </main>
   
