@@ -68,7 +68,9 @@
   
     <nav>
       <!-- Navigation -->
+    <div class="card">
       <a href="/compose" class="btn btn-primary">Compose Message</a>
+    </div>
       
       <div class="card">
         <div class="card-header">
@@ -78,7 +80,7 @@
         <li th:each = "folder : ${defaultFolders}" 
             class="list-group-item d-flex justify-content-between align-items-center">
             <a th:href="@{'/?folder='+ ${folder.label}}" th:text="${folder.label}">Label</Label></a>
-          <span class="badge bg-primary rounded-pill">14</span>
+          <span class="badge bg-primary rounded-pill" th:text="${stats.get(folder.label)}">14</span>
         </li>
       </ul>
       </div>
@@ -91,7 +93,7 @@
         <li th:each = "folder : ${userFolders}" 
             class="list-group-item d-flex justify-content-between align-items-center">
             <a th:href="@{'/?folder='+ ${folder.label}}" th:text="${folder.label}">Label</Label></a>
-          <span class="badge bg-primary rounded-pill">14</span>
+          <span class="badge bg-primary rounded-pill" th:text="${stats.get(folder.label)}">14</span>
         </li>
       </ul>
       </div>
@@ -106,12 +108,19 @@
             <h5>From</h5>
             <p th:text="${message.from}"></p>
             <h5>To</h5>
-            <p th:text="${message.to}"></p>
+            <p th:text="${toIds}"></p>
             <h5>Subject</h5>
             <p th:text="${message.subject}">></p>
             <h5>Body</h5>
             <p th:text="${message.body}"></p>
+            <div class="d-grid gap-2 d-md-block">
+			  <a class="btn btn-primary" th:href="@{'/compose?toIds='+ ${message.from}}" type="button">Reply</a>
+			  <a class="btn btn-primary" th:href="@{'/compose?toIds='+ ${message.from}}+','+${toIds}" type="button">Reply All</a>
+			</div>
+            
         </div>
+        
+        
             
           
 

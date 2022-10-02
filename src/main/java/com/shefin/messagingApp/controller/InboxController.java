@@ -2,6 +2,8 @@ package com.shefin.messagingApp.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -19,10 +21,13 @@ import com.shefin.messagingApp.entity.Folder;
 import com.shefin.messagingApp.entity.Message;
 import com.shefin.messagingApp.entity.MessageList;
 import com.shefin.messagingApp.entity.MessageListKey;
+import com.shefin.messagingApp.entity.UnreadMessageStat;
 import com.shefin.messagingApp.repo.FolderRepo;
 import com.shefin.messagingApp.repo.MessageListRepo;
 import com.shefin.messagingApp.repo.MessageRepo;
+import com.shefin.messagingApp.repo.UnreadMessageStatsRepo;
 import com.shefin.messagingApp.service.FolderService;
+import com.shefin.messagingApp.service.MessageService;
 
 
 
@@ -35,8 +40,11 @@ public class InboxController {
 	
 	@Autowired
 	private MessageListRepo messageListRepo;
+	
+	
+	
 	@Autowired
-	private MessageRepo messageRepo;
+	private MessageService messageService;
 	
 	@RequestMapping("/")
 	public String homePage(
@@ -60,6 +68,11 @@ public class InboxController {
 		List<Folder> defaultFolders = folderService.getDefaultFolders(userId);
 		model.addAttribute("defaultFolders",defaultFolders);
 		
+		// fetching unread message stats for the user
+			
+		model.addAttribute("stats", folderService.mapCountToLabel(userId));
+		
+		
 		//fetching message list ; this should be a path variable as we want the page to load when click on it
 		
 		if (!StringUtils.hasText(folder)) {
@@ -68,8 +81,11 @@ public class InboxController {
 		
 		
 		List<MessageList> inboxList = messageListRepo.findAllByKey_IdAndKey_Label(userId, folder);
+		
 		model.addAttribute("inboxList", inboxList);
 		model.addAttribute("folderName", folder);
+		
+		
 		
 		return "inbox-page.html";
 		
@@ -79,32 +95,11 @@ public class InboxController {
 	public void init() {
 		folderRepo.save(new Folder("Shefin-Shareef","Spam","Green"));
 		folderRepo.save(new Folder("Shefin-Shareef","Service","Blue"));
-		folderRepo.save(new Folder("Shefin-Shareef","Work","Yelloq"));
+		folderRepo.save(new Folder("Shefin-Shareef","Work","Yellow"));
+		
 		
 		for(int i = 0; i<10;i++) {
-			MessageListKey key = new MessageListKey();
-			key.setId("Shefin-Shareef");
-			key.setLabel("Inbox");
-			key.setTimeUUID(Uuids.timeBased());
-			
-			MessageList list = new MessageList();
-			list.setKey(key);
-			list.setSubject("Subject "+ i);
-			List<String> to = Arrays.asList("Shefin-Shareef","Ashiya");
-			list.setTo(to);
-			list.setUnread(true);
-						
-			messageListRepo.save(list);
-			
-			
-			Message message = new Message();
-			message.setId(key.getTimeUUID());
-			message.setSubject(list.getSubject());
-			message.setFrom("koushik");
-			message.setBody("Body "+i);
-			message.setTo(to);
-			
-			messageRepo.save(message);
+			messageService.sendMessage("Shareef", Arrays.asList("Shefin-Shareef","Ashiya","Sharmina"), "subject"+i, "body"+i);
 		}
 		
 		
