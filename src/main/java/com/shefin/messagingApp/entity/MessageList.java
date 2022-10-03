@@ -2,6 +2,7 @@ package com.shefin.messagingApp.entity;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -17,6 +18,17 @@ public class MessageList {
 	private String subject;
 	@CassandraType(type = Name.BOOLEAN)
 	private boolean isUnread;
+	@Transient
+	private String timeAgo;
+	
+	
+	
+	public String getTimeAgo() {
+		return timeAgo;
+	}
+	public void setTimeAgo(String timeAgo) {
+		this.timeAgo = timeAgo;
+	}
 	public MessageListKey getKey() {
 		return key;
 	}

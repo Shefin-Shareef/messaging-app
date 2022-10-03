@@ -19,6 +19,7 @@
     <style>
           .container {
       display: grid;
+      margin-top:20px;
 
       grid-template-areas:
         "header header header"
@@ -63,7 +64,10 @@
 	
   <div class="container">
     <header>
-      <h2>Hello, Shefin</h2>
+	    <h3>
+		  Hello
+		  <small class="text-muted" th:text="${userName}">With faded secondary text</small>
+		</h3>
     </header>
   
     <nav>
@@ -113,7 +117,7 @@
           >
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1" th:text="${message.subject}">List group item heading</h5>
-            <small>3 days ago</small>
+            <small th:text="${message.timeAgo}">3 days ago</small>
           </div>
           <p class="mb-1" th:text="${message.to}">Some placeholder content in a paragraph.</p>
         </a>

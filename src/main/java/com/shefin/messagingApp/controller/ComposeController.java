@@ -62,7 +62,8 @@ public class ComposeController {
 				if (StringUtils.hasText(toIds)) {
 					model.addAttribute("toIds", toIds);					
 				}
-				
+
+				model.addAttribute("userName", principal.getAttribute("name"));
 				return "compose-message.html";
 				
 		

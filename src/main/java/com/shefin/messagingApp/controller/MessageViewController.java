@@ -93,7 +93,7 @@ public class MessageViewController {
 		
 		model.addAttribute("message",message.get());
 		model.addAttribute("toIds", toIds);
-		
+		model.addAttribute("userName", principal.getAttribute("name"));
 		model.addAttribute("stats", folderService.mapCountToLabel(userId));
 		
 		
